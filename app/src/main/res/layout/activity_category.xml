@@ -4,18 +4,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="group5.tcss450.uw.edu.whywait.CategoryActivity">
-    <Bu
+    tools:context="group5.tcss450.uw.edu.whywait.CategoryActivity"
+    android:orientation="vertical">
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="gym"
-        android:id="@+id/gym_button"
-        android:clickable="true"/>
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/Category_list">
+        android:layout_height="wrap_content">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="gym"
+            android:id="@+id/gym_button"
+            android:onClick="goToMap"
+            android:layout_weight="1"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Movie Theaters"
+            android:id="@+id/theater_button"
+            android:onClick="goToMap"
+            android:layout_weight="1"/>
+    </LinearLayout>
 
-    </ListView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Parks"
+            android:id="@+id/parks_button"
+            android:onClick="goToMap"
+            android:layout_weight="1"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text = "Restaurants"
+            android:id="@+id/restaurant_button"
+            android:onClick="goToMap"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
 
 </LinearLayout>
