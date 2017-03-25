@@ -19,9 +19,7 @@ import android.widget.ListView;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private String[] mPlanetTitles;
-    private DrawerLayout mDrawerLayout;
-    private ListView mDrawerList;
+    private static final String Key_Search = "name";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +51,7 @@ public class MainActivity extends AppCompatActivity
         EditText edit = (EditText) findViewById(R.id.search_field);
         String temp = edit.getText().toString();
         Intent intent = new Intent(this, MapsActivity.class);
-        intent.putExtra("Search", temp);
+        intent.putExtra(Key_Search, temp);
         startActivity(intent);
     }
 
