@@ -14,10 +14,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private String[] mPlanetTitles;
+    private DrawerLayout mDrawerLayout;
+    private ListView mDrawerList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,7 +96,8 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            // Handle the camera action
+            Intent intent = new Intent(this, CategoryActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
