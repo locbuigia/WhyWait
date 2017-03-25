@@ -25,6 +25,7 @@ public class CategoryActivity extends AppCompatActivity {
                 intent = new Intent(this, MapsActivity.class);
                 intent.putExtra(Key_Search, "gym");
                 startActivity(intent);
+
             case R.id.theater_button:
                 intent = new Intent(this, MapsActivity.class);
                 intent.putExtra(Key_Search, "movie_theater");
