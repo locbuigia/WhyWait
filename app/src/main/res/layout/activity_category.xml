@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="group5.tcss450.uw.edu.whywait.CategoryActivity">
+    <Bu
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="gym"
+        android:id="@+id/gym_button"
+        android:clickable="true"/>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Category_list">
 
-</android.support.constraint.ConstraintLayout>
+    </ListView>
+
+</LinearLayout>
