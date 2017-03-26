@@ -114,7 +114,7 @@ public class GetNearbyPlacesData extends AsyncTask<Object, String, String>{
         Log.d("GooglePlacesReadTask", "onPostExecute Entered");
         List<DataParser> nearbyPlacesList;
         DataParser dataParser = new DataParser();
-        nearbyPlacesList =  dataParser.parse(result);
+        nearbyPlacesList =  dataParser.parse(result, MainActivity.caseToParse);
         showNearbyPlaces(nearbyPlacesList);
         Log.d("GooglePlacesReadTask", "onPostExecute Exit");
     }

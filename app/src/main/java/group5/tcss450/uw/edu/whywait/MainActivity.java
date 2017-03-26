@@ -3,6 +3,8 @@ package group5.tcss450.uw.edu.whywait;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
@@ -37,6 +39,10 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.io.IOException;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback,
@@ -58,6 +64,8 @@ public class MainActivity extends AppCompatActivity
     private Location mLastLocation;
 
     String place;
+
+    public static int caseToParse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,13 +105,13 @@ public class MainActivity extends AppCompatActivity
     }
 
     private String getUrl(double latitude, double longitude, String nearbyPlace) {
-
         StringBuilder googlePlacesUrl = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
         googlePlacesUrl.append("location=" + latitude + "," + longitude);
         googlePlacesUrl.append("&radius=" + 4000);
         googlePlacesUrl.append("&type=" + nearbyPlace);
         googlePlacesUrl.append("&sensor=true");
         googlePlacesUrl.append("&key=" + "AIzaSyATuUiZUkEc_UgHuqsBJa1oqaODI-3mLs0");
+        caseToParse = 1;
         Log.d("getUrl", googlePlacesUrl.toString());
         return (googlePlacesUrl.toString());
     }
@@ -132,21 +140,6 @@ public class MainActivity extends AppCompatActivity
         else {
             buildGoogleApiClient();
             mMap.setMyLocationEnabled(true);
-        }
-
-        if (place != null) {
-            mMap.clear();
-            Log.d("onClick", "Button is Clicked");
-            if (mCurrLocationMarker != null) {
-                mCurrLocationMarker.remove();
-            }
-            String url = getUrl(47.5786, -122.168, place);
-            Object[] DataTransfer = new Object[2];
-            DataTransfer[0] = mMap;
-            DataTransfer[1] = url;
-            Log.d("onClick", url);
-            GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
-            getNearbyPlacesData.execute(DataTransfer);
         }
     }
 
@@ -194,6 +187,22 @@ public class MainActivity extends AppCompatActivity
 
             mMap.moveCamera(CameraUpdateFactory.newLatLng(latlng));
             mMap.animateCamera(CameraUpdateFactory.zoomTo(13));
+        }
+
+
+        if (place != null) {
+            mMap.clear();
+            Log.d("onClick", "Button is Clicked");
+            if (mCurrLocationMarker != null) {
+                mCurrLocationMarker.remove();
+            }
+            String url = getUrl(latitude, longitude, place);
+            Object[] DataTransfer = new Object[2];
+            DataTransfer[0] = mMap;
+            DataTransfer[1] = url;
+            Log.d("onClick", url);
+            GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
+            getNearbyPlacesData.execute(DataTransfer);
         }
     }
 
@@ -259,8 +268,38 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public void Search(View v) {
+    private String getUrlText(double latitude, double longitude, String query) {
+        StringBuilder googlePlacesUrl = new StringBuilder("https://maps.googleapis.com/maps/api/place/textsearch/json?");
+        googlePlacesUrl.append("query=" + removeSpace(query));
+        googlePlacesUrl.append("&key=" + "AIzaSyDgLG9KkGrNINMbw2kJgcNOKl1fLpbOF_8");
+        googlePlacesUrl.append("&location=" + latitude + "," + longitude);
+        googlePlacesUrl.append("&radius=" + 4000);
+        Log.d("getUrl", googlePlacesUrl.toString());
+        caseToParse = 2;
+        return (googlePlacesUrl.toString());
+    }
 
+    private String removeSpace(String str) {
+        String returnStr;
+        return returnStr = str.replace(" ", "_");
+    }
+
+    public void Search(View v) {
+        EditText location_tf = (EditText) findViewById(R.id.search_field);
+        String location = location_tf.getText().toString();
+        mMap.clear();
+        Log.d("onClick", "Button is Clicked");
+        if (mCurrLocationMarker != null) {
+            mCurrLocationMarker.remove();
+        }
+
+        String url = getUrlText(latitude, longitude, location);
+        Object[] DataTransfer = new Object[2];
+        DataTransfer[0] = mMap;
+        DataTransfer[1] = url;
+        Log.d("onClick", url);
+        GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
+        getNearbyPlacesData.execute(DataTransfer);
     }
 
     @Override

@@ -27,6 +27,7 @@
                     android:background="@color/wallet_dim_foreground_inverse_disabled_holo_dark"
                     android:layout_height="wrap_content"
                     android:id="@+id/search_field"
+                    android:textColor="@color/white"
                     android:textSize="20dp"
                     android:hint="Search for a place"
                     android:textColorHint="@color/white"

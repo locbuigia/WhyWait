@@ -77,7 +77,7 @@ public class DataParser implements Serializable {
      * Pares the json string and returns a list of data fields.
      */
 
-    public List<DataParser> parse(String jsonData) {
+    public List<DataParser> parse(String jsonData, int caseToParse) {
         ArrayList<DataParser> list = new ArrayList<>();
         JSONArray jsonArray;
         JSONObject jsonObject;
@@ -96,7 +96,12 @@ public class DataParser implements Serializable {
                     JSONObject location = geo.getJSONObject("location");
 
                     String name = object.getString("name");
-                    String vicinity = object.getString("vicinity");
+                    String address = "";
+                    if (caseToParse == 1) {
+                        address = object.getString("vicinity");
+                    } else if (caseToParse == 2){
+                        address = object.getString("formatted_address");
+                    }
                     String lat = location.getString("lat");
                     String lng = location.getString("lng");
 
@@ -115,8 +120,8 @@ public class DataParser implements Serializable {
                         priceLevel = 0;
                     }
 
+                    DataParser gas = new DataParser(name, address, lat, lng, rating, priceLevel);
 
-                    DataParser gas = new DataParser(name, vicinity, lat, lng, rating, priceLevel);
                     list.add(gas);
                 }
             }
