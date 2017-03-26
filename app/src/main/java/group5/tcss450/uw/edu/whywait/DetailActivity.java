@@ -38,7 +38,10 @@ public class DetailActivity extends AppCompatActivity {
         ratingTv.setText(rating);
 
         TextView openTv = (TextView) findViewById(R.id.openNowTextView);
-        String openStr = getIntent().getSerializableExtra("openNow").toString();
+        String openStr = "Not Available";
+        if (getIntent().getSerializableExtra("openNow") != null) {
+            openStr = getIntent().getSerializableExtra("openNow").toString();
+        }
         openTv.setText(openStr);
 
 
@@ -79,7 +82,7 @@ public class DetailActivity extends AppCompatActivity {
 
         BarData data = new BarData(labels, dataset);
         chart.setData(data);
-
+        chart.animateY(2000);
         chart.setDescription("");
     }
     
