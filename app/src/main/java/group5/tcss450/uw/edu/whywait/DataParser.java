@@ -45,7 +45,7 @@ public class DataParser implements Serializable {
      * The price level of the gas station.
      */
 
-    private int mPriceLevel;
+    private String mOpenNow;
 
     /*
      * Constructor of the for the data.
@@ -57,13 +57,13 @@ public class DataParser implements Serializable {
      * @param thePriceLevel The price level of the station.
      */
 
-    public DataParser(String theName, String theVicinity, String theLat, String theLng, double theRating, int thePriceLevel) {
+    public DataParser(String theName, String theVicinity, String theLat, String theLng, double theRating, String theOpenNow) {
         mName = theName;
         mVicinity = theVicinity;
         mLat = theLat;
         mLng = theLng;
         mRating = theRating;
-        mPriceLevel = thePriceLevel;
+        mOpenNow = theOpenNow;
     }
 
     /*
@@ -105,6 +105,9 @@ public class DataParser implements Serializable {
                     String lat = location.getString("lat");
                     String lng = location.getString("lng");
 
+                    JSONObject openNowObject = object.getJSONObject("opening_hours");
+                    String openNow = openNowObject.getString("open_now");
+
                     double rating;
                     try {
                         rating = object.getDouble("rating");
@@ -112,15 +115,8 @@ public class DataParser implements Serializable {
                         rating = 0.0;
                     }
 
-                    int priceLevel;
 
-                    try {
-                        priceLevel = object.getInt("price_level");
-                    } catch (JSONException e) {
-                        priceLevel = 0;
-                    }
-
-                    DataParser gas = new DataParser(name, address, lat, lng, rating, priceLevel);
+                    DataParser gas = new DataParser(name, address, lat, lng, rating, openNow);
 
                     list.add(gas);
                 }
@@ -147,7 +143,7 @@ public class DataParser implements Serializable {
     public double getRating() {
         return mRating;
     }
-    public int getPriceLevel() {
-        return mPriceLevel;
+    public String getOpenNow() {
+        return mOpenNow;
     }
 }

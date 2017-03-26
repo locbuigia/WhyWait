@@ -10,7 +10,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -41,6 +43,20 @@ public class ListActivity extends AppCompatActivity
                 android.R.layout.simple_list_item_1,
                 GetNearbyPlacesData.mListName);
         lv.setAdapter(arrayAdapter);
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                DataParser dp;
+                dp = GetNearbyPlacesData.mList.get(position);
+                Intent intent = new Intent(getApplication(), DetailActivity.class);
+
+                intent.putExtra("name", dp.getName());
+                intent.putExtra("vicinity", dp.getVicinity());
+                intent.putExtra("rating", dp.getRating());
+
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -81,10 +97,7 @@ public class ListActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_category) {
-            Intent intent = new Intent(this, CategoryActivity.class);
-            startActivity(intent);
-        }  else if (id == R.id.nav_history) {
+        if (id == R.id.nav_history) {
 
         } else if (id == R.id.nav_list) {
         } else if (id == R.id.nav_map) {

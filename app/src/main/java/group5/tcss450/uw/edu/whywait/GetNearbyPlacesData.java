@@ -67,16 +67,16 @@ public class GetNearbyPlacesData extends AsyncTask<Object, String, String>{
     private double rating;
 
     /*
-     * Price of the gas station.
+     * Open Now?
      */
 
-    private int priceLevel;
+    private String openNow;
 
     /*
      * List of the data that has been parsed.
      */
 
-    public List<DataParser> mList;
+    public static List<DataParser> mList;
 
     public static List<String> mListName;
 
@@ -135,9 +135,9 @@ public class GetNearbyPlacesData extends AsyncTask<Object, String, String>{
             name = googlePlace.getName();
             vicinity = googlePlace.getVicinity();
             rating = googlePlace.getRating();
-            priceLevel = googlePlace.getPriceLevel();
+            openNow = googlePlace.getOpenNow();
             DataParser dataParser = new DataParser(name, vicinity,
-                    googlePlace.getLat(), googlePlace.getLng(), rating, priceLevel);
+                    googlePlace.getLat(), googlePlace.getLng(), rating, openNow);
             mList.add(dataParser);
             mListName.add(mList.get(i).getName());
             Log.d("mList:", " " + mList.get(i).getName());
