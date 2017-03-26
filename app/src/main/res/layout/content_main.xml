@@ -9,30 +9,39 @@
     tools:context="group5.tcss450.uw.edu.whywait.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <EditText
-            android:layout_width="match_parent"
-            android:background="@color/wallet_dim_foreground_inverse_disabled_holo_dark"
-            android:layout_height="wrap_content"
-            android:id="@+id/search_field"
-            android:hint="Search for a place"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="144dp" />
-        <Button
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="Search"
-            android:text="Search"
-            android:id="@+id/button"
-            android:layout_below="@+id/search_field"
-            android:layout_centerHorizontal="true" />
+            android:layout_height="fill_parent"
+            android:layout_gravity="center_horizontal">
 
-        <include
-            layout="@layout/activity_maps">
-        </include>
-    </RelativeLayout>
+                <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    android:id="@+id/map"
+                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:context="group5.tcss450.uw.edu.outofgas.MapsActivity" />
+
+                <EditText
+                    android:layout_width="200dp"
+                    android:background="@color/wallet_dim_foreground_inverse_disabled_holo_dark"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/search_field"
+                    android:textSize="20dp"
+                    android:hint="Search for a place"
+                    android:textColorHint="@color/white"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="19dp"
+                    android:gravity="center_horizontal"/>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="Search"
+                    android:text="Search"
+                    android:id="@+id/button"
+                    android:layout_below="@+id/search_field"
+                    android:layout_centerHorizontal="true" />
+
+        </RelativeLayout>
 </LinearLayout>
