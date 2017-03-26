@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity
         googlePlacesUrl.append("&radius=" + 4000);
         googlePlacesUrl.append("&type=" + nearbyPlace);
         googlePlacesUrl.append("&sensor=true");
-        googlePlacesUrl.append("&key=" + "AIzaSyATuUiZUkEc_UgHuqsBJa1oqaODI-3mLs0");
+        googlePlacesUrl.append("&key=" + "AIzaSyDoMVUGh6iGgKWautnSKitf2KpLGEM_oKM");
         caseToParse = 1;
         Log.d("getUrl", googlePlacesUrl.toString());
         return (googlePlacesUrl.toString());
@@ -272,7 +272,7 @@ public class MainActivity extends AppCompatActivity
     private String getUrlText(double latitude, double longitude, String query) {
         StringBuilder googlePlacesUrl = new StringBuilder("https://maps.googleapis.com/maps/api/place/textsearch/json?");
         googlePlacesUrl.append("query=" + removeSpace(query));
-        googlePlacesUrl.append("&key=" + "AIzaSyDgLG9KkGrNINMbw2kJgcNOKl1fLpbOF_8");
+        googlePlacesUrl.append("&key=" + "AIzaSyDoMVUGh6iGgKWautnSKitf2KpLGEM_oKM");
         googlePlacesUrl.append("&location=" + latitude + "," + longitude);
         googlePlacesUrl.append("&radius=" + 400);
         Log.d("getUrl", googlePlacesUrl.toString());
