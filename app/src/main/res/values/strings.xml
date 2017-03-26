@@ -13,4 +13,16 @@
         <item>Parks</item>
     </string-array>
     <string name="title_activity_list">ListActivity</string>
+    <string-array name="DB_COLUMN_NAMES">
+        <item>name</item>
+    </string-array>
+    <string name="DB_NAME">Search.db</string>
+    <string name="TABLE_NAME">Bookmarks</string>
+    <string name="CREATE_NEWS_SQL">
+        CREATE TABLE Bookmarks
+        (name text)
+    </string>
+    <string name="DROP_NEWS_SQL">
+        DROP TABLE IF EXIST Bookmarks
+    </string>
 </resources>

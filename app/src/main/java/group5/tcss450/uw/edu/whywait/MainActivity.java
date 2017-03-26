@@ -50,12 +50,13 @@ public class MainActivity extends AppCompatActivity
     private Marker mCurrLocationMarker;
 
     private static final String TAG = "LocationsActivity";
+    private static final String KEY_DB = "DB";
 
     private LocationRequest mLocationRequest;
     private Location mLastLocation;
 
     String place;
-
+    String name;
     public static int caseToParse;
 
     @Override
@@ -83,6 +84,8 @@ public class MainActivity extends AppCompatActivity
         mapFragment.getMapAsync(this);
 
         place = getIntent().getStringExtra("type");
+        name = getIntent().getStringExtra("name");
+
 
     }
 
@@ -106,7 +109,14 @@ public class MainActivity extends AppCompatActivity
                 .build();
         mGoogleApiClient.connect();
     }
+    private boolean saveToSqlite(String name) {
+        SearchDB courseDB = (SearchDB) getIntent().getSerializableExtra(KEY_DB);
 
+        if (courseDB == null) {
+            courseDB = new SearchDB(this);
+        }
+        return courseDB.insertSearches(name);
+    }
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -171,7 +181,6 @@ public class MainActivity extends AppCompatActivity
             mMap.animateCamera(CameraUpdateFactory.zoomTo(13));
         }
 
-
         if (place != null) {
             mMap.clear();
             Log.d("onClick", "Button is Clicked");
@@ -204,6 +213,9 @@ public class MainActivity extends AppCompatActivity
                     startActivity(intent);
                 }
             });
+        }
+        if (name != null) {
+            SearchHistory(name);
         }
     }
 
@@ -293,7 +305,7 @@ public class MainActivity extends AppCompatActivity
         if (mCurrLocationMarker != null) {
             mCurrLocationMarker.remove();
         }
-
+        saveToSqlite(location);
         String url = getUrlText(latitude, longitude, location);
         Object[] DataTransfer = new Object[2];
         DataTransfer[0] = mMap;
@@ -316,6 +328,21 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intent);
             }
         });
+    }
+
+    public void SearchHistory(String name) {
+        mMap.clear();
+        Log.d("onClick", "Button is Clicked");
+        if (mCurrLocationMarker != null) {
+            mCurrLocationMarker.remove();
+        }
+        String url = getUrlText(latitude, longitude, name);
+        Object[] DataTransfer = new Object[2];
+        DataTransfer[0] = mMap;
+        DataTransfer[1] = url;
+        Log.d("onClick", url);
+        GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
+        getNearbyPlacesData.execute(DataTransfer);
     }
 
     @Override
@@ -355,8 +382,9 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
         if (id == R.id.nav_history) {
+            Intent intent = new Intent(this, HistoryActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_list) {
             Intent intent = new Intent(this, ListActivity.class);

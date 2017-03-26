@@ -46,6 +46,7 @@ public class DataParser implements Serializable {
      */
 
     private String mOpenNow;
+    String openNow;
 
     /*
      * Constructor of the for the data.
@@ -104,10 +105,12 @@ public class DataParser implements Serializable {
                     }
                     String lat = location.getString("lat");
                     String lng = location.getString("lng");
-
-                    JSONObject openNowObject = object.getJSONObject("opening_hours");
-                    String openNow = openNowObject.getString("open_now");
-
+                    if (object.has("opening_hours")) {
+                        JSONObject openNowObject = object.getJSONObject("opening_hours");
+                        openNow = openNowObject.getString("open_now");
+                    } else {
+                        openNow = "not Available";
+                    }
                     double rating;
                     try {
                         rating = object.getDouble("rating");
