@@ -25,21 +25,23 @@ public class CategoryActivity extends AppCompatActivity {
                 intent = new Intent(this, MapsActivity.class);
                 intent.putExtra(Key_Search, "gym");
                 startActivity(intent);
+                break;
 
             case R.id.theater_button:
                 intent = new Intent(this, MapsActivity.class);
                 intent.putExtra(Key_Search, "movie_theater");
                 startActivity(intent);
-
+                break;
             case R.id.parks_button:
                 intent = new Intent(this, MapsActivity.class);
                 intent.putExtra(Key_Search,"park");
                 startActivity(intent);
-
+                break;
             case R.id.restaurant_button:
                 intent = new Intent(this, MapsActivity.class);
                 intent.putExtra(Key_Search,"restaurant");
                 startActivity(intent);
+                break;
         }
     }
     /**
