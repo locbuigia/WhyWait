@@ -327,6 +327,10 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
         }  else if (id == R.id.nav_history) {
 
+        } else if (id == R.id.nav_list) {
+            Intent intent = new Intent(this, ListActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_map) {
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

@@ -78,6 +78,8 @@ public class GetNearbyPlacesData extends AsyncTask<Object, String, String>{
 
     public List<DataParser> mList;
 
+    public static List<String> mListName;
+
     /*
      * Hashmap of the location markers.
      */
@@ -123,6 +125,7 @@ public class GetNearbyPlacesData extends AsyncTask<Object, String, String>{
 
     private void showNearbyPlaces(List<DataParser> nearbyPlacesList) {
         mList = new ArrayList<>();
+        mListName = new ArrayList<>();
         for (int i = 0; i < nearbyPlacesList.size(); i++) {
             Log.d("onPostExecute","Entered into showing locations");
             MarkerOptions markerOptions = new MarkerOptions();
@@ -136,6 +139,8 @@ public class GetNearbyPlacesData extends AsyncTask<Object, String, String>{
             DataParser dataParser = new DataParser(name, vicinity,
                     googlePlace.getLat(), googlePlace.getLng(), rating, priceLevel);
             mList.add(dataParser);
+            mListName.add(mList.get(i).getName());
+            Log.d("mList:", " " + mList.get(i).getName());
             markerOptions.position(new LatLng(lat,lng));
             markerOptions.title(dataParser.getName());
             Marker mark = mMap.addMarker(markerOptions);

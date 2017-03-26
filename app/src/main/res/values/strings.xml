@@ -12,4 +12,5 @@
         <item>Restaurants</item>
         <item>Parks</item>
     </string-array>
+    <string name="title_activity_list">ListActivity</string>
 </resources>
