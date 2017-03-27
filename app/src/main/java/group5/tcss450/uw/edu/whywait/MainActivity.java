@@ -341,8 +341,23 @@ public class MainActivity extends AppCompatActivity
         DataTransfer[0] = mMap;
         DataTransfer[1] = url;
         Log.d("onClick", url);
-        GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
+        final GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
         getNearbyPlacesData.execute(DataTransfer);
+        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                DataParser dp;
+                dp = getNearbyPlacesData.mList.get(getNearbyPlacesData.mPubMarkerMap.get(marker));
+                Intent intent = new Intent(getApplication(), DetailActivity.class);
+
+                intent.putExtra("name", dp.getName());
+                intent.putExtra("vicinity", dp.getVicinity());
+                intent.putExtra("openNow", dp.getOpenNow());
+                intent.putExtra("rating", dp.getRating());
+
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -385,7 +400,6 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_history) {
             Intent intent = new Intent(this, HistoryActivity.class);
             startActivity(intent);
-
         } else if (id == R.id.nav_list) {
             Intent intent = new Intent(this, ListActivity.class);
             startActivity(intent);

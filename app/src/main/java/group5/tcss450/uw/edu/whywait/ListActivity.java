@@ -60,6 +60,7 @@ public class ListActivity extends AppCompatActivity
                 intent.putExtra("name", dp.getName());
                 intent.putExtra("vicinity", dp.getVicinity());
                 intent.putExtra("rating", dp.getRating());
+                intent.putExtra("openNow", dp.getOpenNow());
 
                 startActivity(intent);
             }
@@ -105,7 +106,8 @@ public class ListActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_history) {
-
+            Intent intent = new Intent(this, HistoryActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_list) {
         } else if (id == R.id.nav_map) {
             Intent intent = new Intent(this, MainActivity.class);

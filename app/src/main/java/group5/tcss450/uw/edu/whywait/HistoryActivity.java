@@ -69,7 +69,6 @@ public class HistoryActivity extends AppCompatActivity {
                 Intent intent = new Intent(mActivity, MainActivity.class);
                 intent.putExtra(KEY_SEARCH, tempSearches[position]);
                 startActivity(intent);
-
             }
         });
     }
